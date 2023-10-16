@@ -35,8 +35,8 @@ body {
   width: 80%;
   border-radius: 0;
   box-shadow: 
-    /* Left shadow */ inset 10px 0 50px 0 black,
-    /* Right shadow */ inset -10px 0 50px 0 black;
+    /* Left shadow */ inset 10px 0 50px 10px black,
+    /* Right shadow */ inset -10px 0 50px 10px black;
 }
 
 @media (max-width: 1160px) {
