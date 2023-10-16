@@ -82,23 +82,10 @@ body {
   }
 }
 
-.shine-effect {
-  animation: shine 1.5s ease-in-out infinite;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 25%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 75%
-  );
-  background-size: 200% auto;
-  -webkit-mask: url(/logo.png) no-repeat center / contain;
-  mask: url(/logo.png) no-repeat center / contain;
-}
-
 .logo-container {
   position: relative;
-  width: 175px;
-  height: 175px;
+  width: 180px;
+  height: 180px;
 }
 
 .logo-container::after {
@@ -110,11 +97,11 @@ body {
   bottom: 0;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0) 25%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 75%
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 65%
   );
   background-size: 200% auto;
-  animation: shine 2.5s ease-in-out infinite;
+  animation: shine 3.5s ease-in-out infinite;
   border-radius: 10%;
 }
