@@ -84,8 +84,8 @@ body {
 
 .logo-container {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 185px;
+  height: 185px;
 }
 
 .logo-container::after {

@@ -29,7 +29,7 @@ const Banner: React.FC = () => {
           </div>
         )}
         {showSecondText && (
-          <div className="text-white text-3xl font-bold fade-in ">
+          <div className="text-white text-3xl font-bold fade-in pt-1">
             Better Hockey.
           </div>
         )}
