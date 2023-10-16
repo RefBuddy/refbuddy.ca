@@ -19,16 +19,18 @@ const Banner: React.FC = () => {
 
   return (
     <div className="banner relative flex items-center justify-center">
-      {showFirstText && (
-        <div className="absolute top-36 text-white text-3xl font-bold fade-in">
-          Better Refs.
-        </div>
-      )}
-      {showSecondText && (
-        <div className="absolute top-44 text-white text-3xl font-bold fade-in">
-          Better Hockey.
-        </div>
-      )}
+      <div className="absolute flex flex-col items-center top-36 w-64">
+        {showFirstText && (
+          <div className="text-white text-3xl font-bold fade-in">
+            Better Refs.
+          </div>
+        )}
+        {showSecondText && (
+          <div className="text-white text-3xl font-bold fade-in ">
+            Better Hockey.
+          </div>
+        )}
+      </div>
     </div>
   );
 };
