@@ -34,13 +34,9 @@ const Banner: React.FC = () => {
           </div>
         )}
         {showLogo && (
-          <img
-            src="/logo.png"
-            alt="Logo"
-            className="mt-20 slide-up"
-            width="150"
-            height="150"
-          />
+          <div className="mt-12 slide-up logo-container">
+            <img src="/logo.png" alt="Logo" />
+          </div>
         )}
       </div>
     </div>

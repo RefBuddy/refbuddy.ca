@@ -72,3 +72,49 @@ body {
 .slide-up {
   animation: slideUp 1s ease-in-out forwards;
 }
+
+@keyframes shine {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.shine-effect {
+  animation: shine 1.5s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  background-size: 200% auto;
+  -webkit-mask: url(/logo.png) no-repeat center / contain;
+  mask: url(/logo.png) no-repeat center / contain;
+}
+
+.logo-container {
+  position: relative;
+  width: 175px;
+  height: 175px;
+}
+
+.logo-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 25%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  background-size: 200% auto;
+  animation: shine 2.5s ease-in-out infinite;
+  border-radius: 10%;
+}
