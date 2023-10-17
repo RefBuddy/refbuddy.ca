@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import useMouseTilt from "../hooks/useMouseTilt";
 
 const Banner: React.FC = () => {
   const [showFirstText, setShowFirstText] = useState(false);
   const [showSecondText, setShowSecondText] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
+
+  const logoRef = useMouseTilt();
 
   const handleLogoClick = () => {
     window.scrollTo({
@@ -38,7 +41,11 @@ const Banner: React.FC = () => {
         </div>
       )}
       {showLogo && (
-        <div className="mt-8 slide-up logo-container" onClick={handleLogoClick}>
+        <div
+          className="mt-8 slide-up logo-container"
+          onClick={handleLogoClick}
+          ref={logoRef}
+        >
           <img src="/logo.png" alt="Logo" />
         </div>
       )}

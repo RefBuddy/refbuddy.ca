@@ -3,6 +3,7 @@
   position: relative;
   width: 185px;
   height: 185px;
+  transition: transform 0.3s ease;
 }
 
 .logo-container::after {
@@ -21,4 +22,16 @@
   background-size: 200% auto;
   animation: shine 3.5s ease-in-out infinite;
   border-radius: 10%;
+}
+
+.logo-container:hover {
+  transform: scale(1.1);
+}
+
+.logo-container img {
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover img {
+  transform: perspective(500px);
 }
