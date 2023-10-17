@@ -5,6 +5,13 @@ const Banner: React.FC = () => {
   const [showSecondText, setShowSecondText] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
 
+  const handleLogoClick = () => {
+    window.scrollTo({
+      top: window.scrollY + 170,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     const timer1 = setTimeout(() => setShowFirstText(true), 100);
     const timer2 = setTimeout(() => setShowSecondText(true), 1500);
@@ -31,7 +38,7 @@ const Banner: React.FC = () => {
         </div>
       )}
       {showLogo && (
-        <div className="mt-8 slide-up logo-container">
+        <div className="mt-8 slide-up logo-container" onClick={handleLogoClick}>
           <img src="/logo.png" alt="Logo" />
         </div>
       )}
