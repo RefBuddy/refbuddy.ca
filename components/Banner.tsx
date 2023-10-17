@@ -12,9 +12,9 @@ const Banner: React.FC = () => {
   console.log(scale, opacity);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setShowFirstText(true), 500);
-    const timer2 = setTimeout(() => setShowSecondText(true), 2000);
-    const timer3 = setTimeout(() => setShowLogo(true), 3500);
+    const timer1 = setTimeout(() => setShowFirstText(true), 100);
+    const timer2 = setTimeout(() => setShowSecondText(true), 1500);
+    const timer3 = setTimeout(() => setShowLogo(true), 3000);
 
     // Cleanup timers on component unmount
     return () => {
