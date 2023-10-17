@@ -6,12 +6,15 @@ const useScrollEffect = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const scrollPercentage = scrollPosition / maxScroll;
-      const scaleFactor = 1 + scrollPercentage;
-      const translateY = -scrollPosition;
-      setScrollEffect({scale: scaleFactor, opacity: scrollPercentage, translateY});
-    };
+      const maxScroll = window.innerHeight; 
+      const scrollPercentage = Math.min(scrollPosition / maxScroll, 1);
+      
+      // Use the ease-out sine function for a smoother effect
+      const easedPercentage = Math.sin((Math.PI / 2) * scrollPercentage) * 1.5;
+      
+      const scaleFactor = 1 + (easedPercentage * 10); 
+      setScrollEffect({scale: scaleFactor, opacity: easedPercentage, translateY: 0});
+    };  
 
     window.addEventListener('scroll', handleScroll);
 
