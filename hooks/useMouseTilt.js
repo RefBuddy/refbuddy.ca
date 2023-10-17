@@ -34,9 +34,13 @@ const useMouseTilt = (showLogo) => {
       if (!ref.current) return;
       const img = ref.current.querySelector('img');
       const shine = ref.current.querySelector('.logo-shine');
+      
       img.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;
       shine.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;
-    };
+      
+      // Reset the shine's gradient
+      shine.style.background = `radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0) 70%)`;
+  };  
 
     if (ref.current) {
       ref.current.addEventListener("mousemove", handleMouseMove);
