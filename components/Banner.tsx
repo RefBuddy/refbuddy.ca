@@ -6,7 +6,7 @@ const Banner: React.FC = () => {
   const [showSecondText, setShowSecondText] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
 
-  const logoRef = useMouseTilt();
+  const logoRef = useMouseTilt(showLogo);
 
   const handleLogoClick = () => {
     window.scrollTo({

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useMouseTilt = () => {
+const useMouseTilt = (showLogo) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const useMouseTilt = () => {
         ref.current.removeEventListener("mouseleave", handleMouseLeave);
       }
     };    
-  }, [ref.current]);
+  }, [ref.current, showLogo]);
 
   return ref;
 };
