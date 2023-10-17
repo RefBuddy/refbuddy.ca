@@ -23,7 +23,7 @@ const useMouseTilt = (showLogo) => {
       const shineY = (e.clientY - rect.top) / rect.height * 100;
     
       // Update the shine's gradient to shine outward from the center
-      shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0) 70%)`;
+      shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0) 70%)`;
     
       // Apply the transformation to both the logo and the shine
       img.style.transform = transformStyle;

@@ -14,8 +14,8 @@
   bottom: 0;
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(255, 255, 255, 0.6) 0%,
-    rgba(255, 255, 255, 0.3) 40%,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.15) 40%,
     rgba(255, 255, 255, 0) 70%
   );
   border-radius: 10%;
