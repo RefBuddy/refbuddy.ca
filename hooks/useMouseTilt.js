@@ -7,24 +7,31 @@ const useMouseTilt = (showLogo) => {
     const handleMouseMove = (e) => {
       if (!ref.current) return;
       const img = ref.current.querySelector('img');
+      const shine = ref.current.querySelector('.logo-shine');
       const rect = ref.current.getBoundingClientRect();
       
-      // Calculate the distance of the cursor from the center of the logo in percentage
       const offsetX = (((e.clientX - rect.left) / rect.width) - 0.5) * 100;
       const offsetY = (((e.clientY - rect.top) / rect.height) - 0.5) * 100;
       
-      // Convert the percentage to rotation angles (max ±5 degrees)
-      const rotateX = -offsetY * 0.2; // Negative because moving the mouse up should tilt the logo forward
+      const rotateX = -offsetY * 0.2;
       const rotateY = offsetX * 0.2;
+      const transformStyle = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+      const gradientAngle = Math.atan2(e.clientY - (rect.top + rect.height/2), e.clientX - (rect.left + rect.width/2)) * (180 / Math.PI);
+      shine.style.background = `linear-gradient(${gradientAngle}deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 70%)`;
       
-      img.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  };  
+      // Apply the transformation to both the logo and the shine
+      img.style.transform = transformStyle;
+      shine.style.transform = transformStyle;
+    };
     
     const handleMouseLeave = () => {
       if (!ref.current) return;
       const img = ref.current.querySelector('img');
+      const shine = ref.current.querySelector('.logo-shine');
       img.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;
-    };    
+      shine.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;
+    };
 
     if (ref.current) {
       ref.current.addEventListener("mousemove", handleMouseMove);
@@ -36,7 +43,7 @@ const useMouseTilt = (showLogo) => {
         ref.current.removeEventListener("mousemove", handleMouseMove);
         ref.current.removeEventListener("mouseleave", handleMouseLeave);
       }
-    };    
+    };
   }, [ref.current, showLogo]);
 
   return ref;
