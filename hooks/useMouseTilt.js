@@ -6,6 +6,7 @@ const useMouseTilt = (showLogo) => {
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!ref.current) return;
+    
       const img = ref.current.querySelector('img');
       const shine = ref.current.querySelector('.logo-shine');
       const rect = ref.current.getBoundingClientRect();
@@ -16,14 +17,18 @@ const useMouseTilt = (showLogo) => {
       const rotateX = -offsetY * 0.2;
       const rotateY = offsetX * 0.2;
       const transformStyle = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-      const gradientAngle = Math.atan2(e.clientY - (rect.top + rect.height/2), e.clientX - (rect.left + rect.width/2)) * (180 / Math.PI);
-      shine.style.background = `linear-gradient(${gradientAngle}deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 70%)`;
-      
+    
+      // Calculate the position of shine based on the cursor position
+      const shineX = (e.clientX - rect.left) / rect.width * 100;
+      const shineY = (e.clientY - rect.top) / rect.height * 100;
+    
+      // Update the shine's gradient to shine outward from the center
+      shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0) 70%)`;
+    
       // Apply the transformation to both the logo and the shine
       img.style.transform = transformStyle;
       shine.style.transform = transformStyle;
-    };
+    };     
     
     const handleMouseLeave = () => {
       if (!ref.current) return;
