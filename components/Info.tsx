@@ -4,9 +4,18 @@ import useScrollEffect from "../hooks/useScrollEffect";
 const Info: React.FC = () => {
   const { opacity } = useScrollEffect();
 
+  // Calculate refBuddyOpacity based on scroll position
+  const refBuddyOpacity = Math.max(0, opacity - 0.7) * 3.33;
+
   return (
     <div>
-      <div style={{ height: "200vh", background: "transparent" }}>
+      <div
+        className="text-white text-xs font-bold fade-in z-50 absolute pt-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" // Reduced font size to text-xl
+        style={{ opacity: refBuddyOpacity }}
+      >
+        Ref Buddy
+      </div>
+      <div style={{ height: "110vh", background: "transparent" }}>
         Scrollable content
       </div>
       <div className="blackout" style={{ opacity: opacity }}></div>

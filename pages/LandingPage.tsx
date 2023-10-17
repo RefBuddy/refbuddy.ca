@@ -10,7 +10,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <div
-      className="banner relative flex items-center justify-center"
+      className="banner relative flex flex-col items-center justify-center h-screen"
       style={{ transform: `scale(${scale})` }}
     >
       <Banner />

@@ -10,7 +10,7 @@ const useScrollEffect = () => {
       const scrollPercentage = Math.min(scrollPosition / maxScroll, 1);
       
       // Use the ease-out sine function for a smoother effect
-      const easedPercentage = Math.sin((Math.PI / 2) * scrollPercentage) * 1.5;
+      const easedPercentage = Math.sin((Math.PI / 2) * scrollPercentage) * 3;
       
       const scaleFactor = 1 + (easedPercentage * 10); 
       setScrollEffect({scale: scaleFactor, opacity: easedPercentage, translateY: 0});
