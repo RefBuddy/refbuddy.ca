@@ -10,11 +10,12 @@ const Info: React.FC = () => {
   return (
     <div>
       <div
-        className="text-white text-xs font-bold fade-in z-50 absolute pt-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" // Reduced font size to text-xl
+        className="text-white text-xs font-bold z-50 absolute pt-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         style={{ opacity: refBuddyOpacity }}
       >
         Ref Buddy
       </div>
+
       <div style={{ height: "110vh", background: "transparent" }}>
         Scrollable content
       </div>
