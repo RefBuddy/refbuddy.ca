@@ -31,18 +31,18 @@ const Banner: React.FC = () => {
   return (
     <div className="absolute flex flex-col items-center top-36 w-64">
       {showFirstText && (
-        <div className="text-white text-3xl font-bold fade-in">
+        <div className="text-white text-3xl font-bold fade-in select-none">
           Better Refs.
         </div>
       )}
       {showSecondText && (
-        <div className="text-white text-3xl font-bold fade-in pt-1">
+        <div className="text-white text-3xl font-bold fade-in pt-1 select-none">
           Better Hockey.
         </div>
       )}
       {showLogo && (
         <div
-          className="mt-8 slide-up logo-container"
+          className="mt-8 slide-up logo-container cursor-pointer select-none"
           onClick={handleLogoClick}
           ref={logoRef}
         >
