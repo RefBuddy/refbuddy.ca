@@ -5,26 +5,36 @@ const Banner: React.FC = () => {
   const [showFirstText, setShowFirstText] = useState(false);
   const [showSecondText, setShowSecondText] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
+  const [isCursorPointer, setIsCursorPointer] = useState(true);
 
   const logoRef = useMouseTilt(showLogo);
 
   const handleLogoClick = () => {
-    window.scrollTo({
-      top: window.scrollY + 170,
-      behavior: "smooth",
-    });
+    if (window.scrollY <= 0) {
+      window.scrollTo({
+        top: window.scrollY + 170,
+        behavior: "smooth",
+      });
+    }
   };
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setShowFirstText(true), 100);
-    const timer2 = setTimeout(() => setShowSecondText(true), 1500);
+    const handleScroll = () => {
+      setIsCursorPointer(window.scrollY <= 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    const timer1 = setTimeout(() => setShowFirstText(true), 800);
+    const timer2 = setTimeout(() => setShowSecondText(true), 1800);
     const timer3 = setTimeout(() => setShowLogo(true), 3000);
 
-    // Cleanup timers on component unmount
+    // Cleanup timers and event listener on component unmount
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -42,7 +52,9 @@ const Banner: React.FC = () => {
       )}
       {showLogo && (
         <div
-          className="mt-8 slide-up logo-container cursor-pointer"
+          className={`mt-8 slide-up logo-container ${
+            isCursorPointer ? "cursor-pointer" : ""
+          }`}
           onClick={handleLogoClick}
           ref={logoRef}
         >
