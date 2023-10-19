@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import useMouseTilt from "../hooks/useMouseTilt";
 
 const Banner: React.FC = () => {
-  const [showFirstText, setShowFirstText] = useState(false);
-  const [showSecondText, setShowSecondText] = useState(false);
-  const [showLogo, setShowLogo] = useState(false);
-  const [isCursorPointer, setIsCursorPointer] = useState(true);
+  const [showElements, setShowElements] = useState({
+    firstText: false,
+    secondText: false,
+    logo: false,
+    cursorPointer: true,
+  });
 
-  const logoRef = useMouseTilt(showLogo);
+  const logoRef = useMouseTilt(showElements.logo);
 
   const handleLogoClick = () => {
     if (window.scrollY <= 0) {
@@ -20,16 +22,27 @@ const Banner: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsCursorPointer(window.scrollY <= 0);
+      setShowElements((prev) => ({
+        ...prev,
+        cursorPointer: window.scrollY <= 0,
+      }));
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    const timer1 = setTimeout(() => setShowFirstText(true), 800);
-    const timer2 = setTimeout(() => setShowSecondText(true), 1800);
-    const timer3 = setTimeout(() => setShowLogo(true), 3000);
+    const timer1 = setTimeout(
+      () => setShowElements((prev) => ({ ...prev, firstText: true })),
+      800
+    );
+    const timer2 = setTimeout(
+      () => setShowElements((prev) => ({ ...prev, secondText: true })),
+      1800
+    );
+    const timer3 = setTimeout(
+      () => setShowElements((prev) => ({ ...prev, logo: true })),
+      3000
+    );
 
-    // Cleanup timers and event listener on component unmount
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
@@ -40,20 +53,20 @@ const Banner: React.FC = () => {
 
   return (
     <div className="absolute flex flex-col items-center top-36 w-64">
-      {showFirstText && (
+      {showElements.firstText && (
         <div className="text-white text-3xl font-bold fade-in select-none">
           Better Refs.
         </div>
       )}
-      {showSecondText && (
+      {showElements.secondText && (
         <div className="text-white text-3xl font-bold fade-in pt-1 select-none">
           Better Hockey.
         </div>
       )}
-      {showLogo && (
+      {showElements.logo && (
         <div
           className={`mt-8 slide-up logo-container ${
-            isCursorPointer ? "cursor-pointer" : ""
+            showElements.cursorPointer ? "cursor-pointer" : ""
           }`}
           onClick={handleLogoClick}
           ref={logoRef}

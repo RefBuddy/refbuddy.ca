@@ -7,15 +7,17 @@ import useScrollEffect from "../hooks/useScrollEffect";
 
 const LandingPage: React.FC = () => {
   const { scale } = useScrollEffect();
-  const [fadeIn, setFadeIn] = useState("opacity-0");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setFadeIn("opacity-1 transition-opacity duration-1000 ease-in-out");
+    setIsLoaded(true);
   }, []);
 
   return (
     <div
-      className={`banner relative flex flex-col items-center justify-center h-screen ${fadeIn}`}
+      className={`banner relative flex flex-col items-center justify-center h-screen transition-opacity duration-1000 ease-in-out ${
+        isLoaded ? "opacity-100" : "opacity-0"
+      }`}
       style={{ transform: `scale(${scale})` }}
     >
       <Banner />
