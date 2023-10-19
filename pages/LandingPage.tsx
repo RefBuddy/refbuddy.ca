@@ -25,22 +25,18 @@ const LandingPage: React.FC = () => {
     };
   }, []);
 
-  if (scrollY > 170) {
-    return (
-      <div className="h-screen w-full bg-black flex items-center justify-center">
-        <Info />
-      </div>
-    );
-  }
-
   return (
     <div
       className={`banner relative flex flex-col items-center justify-center h-screen transition-opacity duration-1000 ease-in-out ${
         isLoaded ? "opacity-100" : "opacity-0"
       }`}
-      style={{ transform: `scale(${scale})` }}
+      style={{
+        transform: scrollY <= 170 ? `scale(${scale})` : "scale(1)",
+        backgroundColor: scrollY > 170 ? "black" : "",
+      }}
     >
       <Banner />
+      {scrollY > 170 && <Info />}
     </div>
   );
 };
