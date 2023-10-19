@@ -25,19 +25,28 @@ const LandingPage: React.FC = () => {
     };
   }, []);
 
+  const hideBannerContent = scrollY > 170;
+
   return (
-    <div
-      className={`banner relative flex flex-col items-center justify-center h-screen transition-opacity duration-1000 ease-in-out ${
-        isLoaded ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        transform: scrollY <= 170 ? `scale(${scale})` : "scale(1)",
-        backgroundColor: scrollY > 170 ? "black" : "",
-      }}
-    >
-      <Banner />
-      {scrollY > 170 && <Info />}
-    </div>
+    <>
+      <div
+        className="banner-bg"
+        style={{
+          opacity: scrollY > 170 ? 0 : 1,
+        }}
+      ></div>
+      <div
+        className={`relative flex flex-col items-center justify-center h-screen ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          transform: scrollY <= 170 ? `scale(${scale})` : "scale(1)",
+        }}
+      >
+        <Banner hideContent={hideBannerContent} />
+        {scrollY > 170 && <Info />}
+      </div>
+    </>
   );
 };
 

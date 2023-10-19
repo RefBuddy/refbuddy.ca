@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useMouseTilt from "../hooks/useMouseTilt";
 import useScrollEffect from "../hooks/useScrollEffect";
 
-const Banner: React.FC = () => {
+const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
   const { opacity } = useScrollEffect();
 
   const [showElements, setShowElements] = useState({
@@ -17,7 +17,7 @@ const Banner: React.FC = () => {
   const handleLogoClick = () => {
     if (window.scrollY <= 0) {
       window.scrollTo({
-        top: window.scrollY + 170,
+        top: window.scrollY + 171,
         behavior: "smooth",
       });
     }
@@ -55,7 +55,10 @@ const Banner: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute flex flex-col items-center top-36 w-64">
+    <div
+      className="absolute flex flex-col items-center top-36 w-64"
+      style={{ opacity: hideContent ? 0 : 1 }}
+    >
       {showElements.firstText && (
         <div className="text-white text-3xl font-bold fade-in select-none">
           Better Refs.
@@ -86,7 +89,10 @@ const Banner: React.FC = () => {
       >
         Scrollable content
       </div>
-      <div className="blackout" style={{ opacity: opacity }}></div>
+      <div
+        className="blackout"
+        style={{ opacity: hideContent ? 0 : opacity }}
+      ></div>
     </div>
   );
 };
