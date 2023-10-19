@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import useMouseTilt from "../hooks/useMouseTilt";
 import useScrollEffect from "../hooks/useScrollEffect";
 
-const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
+const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
+  hideContent,
+  scale,
+}) => {
   const { opacity } = useScrollEffect();
 
   const [showElements, setShowElements] = useState({
@@ -11,6 +14,9 @@ const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
     logo: false,
     cursorPointer: true,
   });
+
+  // New state for text opacity
+  const [textOpacity, setTextOpacity] = useState(1);
 
   const logoRef = useMouseTilt(showElements.logo);
 
@@ -29,6 +35,9 @@ const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
         ...prev,
         cursorPointer: window.scrollY <= 0,
       }));
+
+      // Adjust text opacity based on scrollY
+      setTextOpacity(window.scrollY > 0 ? 0 : 1);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -60,12 +69,18 @@ const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
       style={{ opacity: hideContent ? 0 : 1 }}
     >
       {showElements.firstText && (
-        <div className="text-white text-3xl font-bold fade-in select-none">
+        <div
+          className="text-white text-3xl font-bold fade-in select-none"
+          style={{ opacity: textOpacity }}
+        >
           Better Refs.
         </div>
       )}
       {showElements.secondText && (
-        <div className="text-white text-3xl font-bold fade-in pt-1 select-none">
+        <div
+          className="text-white text-3xl font-bold fade-in pt-1 select-none"
+          style={{ opacity: textOpacity }}
+        >
           Better Hockey.
         </div>
       )}
@@ -78,7 +93,11 @@ const Banner: React.FC<{ hideContent: boolean }> = ({ hideContent }) => {
           ref={logoRef}
         >
           <div className="logo-shine"></div>
-          <img src="/logo.png" alt="Logo" />
+          <img
+            src="/logo.png"
+            alt="Logo"
+            style={{ transform: `scale(${scale})` }}
+          />
         </div>
       )}
       <div

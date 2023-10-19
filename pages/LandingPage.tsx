@@ -43,7 +43,7 @@ const LandingPage: React.FC = () => {
           transform: scrollY <= 170 ? `scale(${scale})` : "scale(1)",
         }}
       >
-        <Banner hideContent={hideBannerContent} />
+        <Banner hideContent={hideBannerContent} scale={scale} />
         {scrollY > 170 && <Info />}
       </div>
     </>
