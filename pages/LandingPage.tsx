@@ -8,10 +8,30 @@ import useScrollEffect from "../hooks/useScrollEffect";
 const LandingPage: React.FC = () => {
   const { scale } = useScrollEffect();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (scrollY > 170) {
+    return (
+      <div className="h-screen w-full bg-black flex items-center justify-center">
+        <Info />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -21,7 +41,6 @@ const LandingPage: React.FC = () => {
       style={{ transform: `scale(${scale})` }}
     >
       <Banner />
-      <Info />
     </div>
   );
 };
