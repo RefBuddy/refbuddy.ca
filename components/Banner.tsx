@@ -5,8 +5,6 @@ import useScrollEffect from "../hooks/useScrollEffect";
 const Banner: React.FC = () => {
   const { opacity } = useScrollEffect();
 
-  // Calculate refBuddyOpacity based on scroll position
-  const refBuddyOpacity = Math.max(0, opacity - 0.7) * 3.33;
   const [showElements, setShowElements] = useState({
     firstText: false,
     secondText: false,
