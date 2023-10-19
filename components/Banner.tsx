@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useMouseTilt from "../hooks/useMouseTilt";
+import useScrollEffect from "../hooks/useScrollEffect";
 
 const Banner: React.FC = () => {
+  const { opacity } = useScrollEffect();
+
+  // Calculate refBuddyOpacity based on scroll position
+  const refBuddyOpacity = Math.max(0, opacity - 0.7) * 3.33;
   const [showElements, setShowElements] = useState({
     firstText: false,
     secondText: false,
@@ -75,6 +80,15 @@ const Banner: React.FC = () => {
           <img src="/logo.png" alt="Logo" />
         </div>
       )}
+      <div
+        className="pointer-events-none bg-transparent text-transparent"
+        style={{
+          height: "200vh",
+        }}
+      >
+        Scrollable content
+      </div>
+      <div className="blackout" style={{ opacity: opacity }}></div>
     </div>
   );
 };

@@ -15,11 +15,6 @@ const Info: React.FC = () => {
       >
         Ref Buddy
       </div>
-
-      <div style={{ height: "200vh", background: "transparent" }}>
-        Scrollable content
-      </div>
-      <div className="blackout" style={{ opacity: opacity }}></div>
     </div>
   );
 };
