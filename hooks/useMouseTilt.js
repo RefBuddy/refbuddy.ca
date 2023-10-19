@@ -14,8 +14,8 @@ const useMouseTilt = (showLogo) => {
       const offsetX = (((e.clientX - rect.left) / rect.width) - 0.5) * 100;
       const offsetY = (((e.clientY - rect.top) / rect.height) - 0.5) * 100;
       
-      const rotateX = -offsetY * 0.2;
-      const rotateY = offsetX * 0.2;
+      const rotateX = -offsetY * 0.4;
+      const rotateY = offsetX * 0.4;
       const transformStyle = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     
       // Calculate the position of shine based on the cursor position
