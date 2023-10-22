@@ -11,10 +11,15 @@ import useScrollPosition from "@/hooks/useScrollPosition";
 const LandingPage: React.FC = () => {
   const scrollEffect = useScrollEffect();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [fadeClass, setFadeClass] = useState("fade-in");
   const scrollY = useScrollPosition();
 
   useEffect(() => {
     setIsLoaded(true);
+    const fadeTimeout = setTimeout(() => {
+      setFadeClass("instant"); // Switch to instant class after initial fade-in
+    }, 1000); // Transition duration
+    return () => clearTimeout(fadeTimeout);
   }, []);
 
   const hideHeroContent = scrollY > 170;
@@ -22,7 +27,7 @@ const LandingPage: React.FC = () => {
   return (
     <>
       <div
-        className="hero-bg"
+        className={`hero-bg ${fadeClass}`}
         style={{
           opacity: scrollY > 170 ? 0 : 1,
         }}
