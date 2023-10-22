@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Hook to compute visual effects based on scroll position.
+ * @returns - An object containing values for scaling, opacity, and translation,
+ * which can be used to style elements based on scroll position.
+ */
 const useScrollEffect = () => {
   const [scrollEffect, setScrollEffect] = useState({
     scale: 1,
@@ -7,23 +12,27 @@ const useScrollEffect = () => {
     translateY: 0,
   });
 
+  /**
+   * Handler for scroll events. Calculates scaling, opacity, and translation values
+   * based on the current scroll position.
+   */
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    const maxScroll = window.innerHeight;
+    const scrollPercentage = Math.min(scrollPosition / maxScroll, 1);
+
+    // Use the ease-out sine function for a smoother effect
+    const easedPercentage = Math.sin((Math.PI / 2) * scrollPercentage) * 3;
+
+    const scaleFactor = 1 + easedPercentage * 10;
+    setScrollEffect({
+      scale: scaleFactor,
+      opacity: easedPercentage,
+      translateY: 0,
+    });
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const maxScroll = window.innerHeight;
-      const scrollPercentage = Math.min(scrollPosition / maxScroll, 1);
-
-      // Use the ease-out sine function for a smoother effect
-      const easedPercentage = Math.sin((Math.PI / 2) * scrollPercentage) * 3;
-
-      const scaleFactor = 1 + easedPercentage * 10;
-      setScrollEffect({
-        scale: scaleFactor,
-        opacity: easedPercentage,
-        translateY: 0,
-      });
-    };
-
     window.addEventListener("scroll", handleScroll);
 
     // Cleanup

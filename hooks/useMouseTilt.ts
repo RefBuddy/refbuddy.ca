@@ -1,20 +1,41 @@
 import { useEffect, useRef, MutableRefObject } from "react";
 
+/**
+ * Hook to add a 3D tilt effect to an element based on mouse movement.
+ * @param showLogo - A flag indicating whether to show the logo.
+ * @returns - A ref to be attached to the element that should have the tilt effect.
+ */
 const useMouseTilt = (
   showLogo: boolean
 ): MutableRefObject<HTMLDivElement | null> => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!ref.current) return;
+  /**
+   * Helper function to get the necessary elements and check their existence.
+   */
+  const getElements = () => {
+    if (!ref.current) return null;
 
     const img = ref.current.querySelector("img") as HTMLImageElement | null;
     const shine = ref.current.querySelector(
       ".logo-shine"
     ) as HTMLDivElement | null;
-    const rect = ref.current.getBoundingClientRect();
 
-    if (!img || !shine) return;
+    if (!img || !shine) return null;
+
+    return { img, shine };
+  };
+
+  /**
+   * Handler for mouse movement. Calculates and applies the necessary transformations
+   * to create a 3D tilt effect based on mouse position.
+   */
+  const handleMouseMove = (e: MouseEvent) => {
+    const elements = getElements();
+    if (!elements) return;
+
+    const { img, shine } = elements;
+    const rect = ref.current!.getBoundingClientRect();
 
     const offsetX = ((e.clientX - rect.left) / rect.width - 0.5) * 100;
     const offsetY = ((e.clientY - rect.top) / rect.height - 0.5) * 100;
@@ -35,14 +56,14 @@ const useMouseTilt = (
     shine.style.transform = transformStyle;
   };
 
+  /**
+   * Handler for mouse leave event. Resets the transformations applied during mouse move.
+   */
   const handleMouseLeave = () => {
-    if (!ref.current) return;
-    const img = ref.current.querySelector("img") as HTMLImageElement | null;
-    const shine = ref.current.querySelector(
-      ".logo-shine"
-    ) as HTMLDivElement | null;
+    const elements = getElements();
+    if (!elements) return;
 
-    if (!img || !shine) return;
+    const { img, shine } = elements;
 
     img.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;
     shine.style.transform = `perspective(500px) rotateX(0deg) rotateY(0deg)`;

@@ -1,44 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
+/**
+ * Hook to smoothly scroll to a target position.
+ * @param targetScroll - The target scroll position.
+ * @returns - An object containing a handler for scroll events and the current scroll position.
+ */
 const useSmoothScrollToTarget = (targetScroll: number) => {
   const [scrollY, setScrollY] = useState(0);
 
-  let rafId: number | null = null;
+  /**
+   * Linear interpolation function.
+   */
+  const lerp = useCallback(
+    (a: number, b: number, n: number) => (1 - n) * a + n * b,
+    []
+  );
 
-  const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
-
-  const handleScroll = () => {
-    if (window.scrollY > targetScroll && !rafId) {
-      rafId = requestAnimationFrame(smoothScrollToTarget);
-    } else {
-      setScrollY(window.scrollY);
-    }
-  };
-
-  const smoothScrollToTarget = () => {
+  /**
+   * Function to smoothly scroll to the target position.
+   */
+  const smoothScrollToTarget = useCallback(() => {
     const currentScroll = window.scrollY;
     const newScroll = lerp(currentScroll, targetScroll, 0.1);
 
     if (Math.abs(newScroll - currentScroll) < 0.5) {
       window.scrollTo(0, targetScroll);
-      cancelAnimationFrame(rafId!);
-      rafId = null;
       return;
     }
 
     window.scrollTo(0, newScroll);
-    rafId = requestAnimationFrame(smoothScrollToTarget);
-  };
+    requestAnimationFrame(smoothScrollToTarget);
+  }, [lerp, targetScroll]);
+
+  /**
+   * Handler for scroll events. Initiates smooth scrolling if necessary.
+   */
+  const handleScroll = useCallback(() => {
+    if (window.scrollY > targetScroll) {
+      requestAnimationFrame(smoothScrollToTarget);
+    } else {
+      setScrollY(window.scrollY);
+    }
+  }, [smoothScrollToTarget, targetScroll]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-      }
     };
-  }, []);
+  }, [handleScroll]);
 
   return { handleScroll, scrollY };
 };
