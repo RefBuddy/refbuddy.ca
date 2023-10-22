@@ -1,3 +1,4 @@
+/* banner.css */
 .banner-bg {
   background-image: url("/banner.png");
   background-size: contain;
@@ -15,4 +16,8 @@
   .banner-bg {
     width: 100%;
   }
+}
+
+.shadow-offset-black {
+  box-shadow: 3px 0 0 black, 0 3px 0 black;
 }

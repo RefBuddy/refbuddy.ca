@@ -1,9 +1,5 @@
-import LandingPage from "../pages/LandingPage";
+import Home from "../pages/Home";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <LandingPage />
-    </main>
-  );
+export default function App() {
+  return <Home />;
 }

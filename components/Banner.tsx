@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useMouseTilt from "../hooks/useMouseTilt";
 import useScrollEffect from "../hooks/useScrollEffect";
+import useSmoothScrollToTarget from "../hooks/useSmoothScrollToTarget";
 
 const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
   hideContent,
   scale,
 }) => {
   const { opacity } = useScrollEffect();
+  const { handleScroll } = useSmoothScrollToTarget(171);
 
   const [showElements, setShowElements] = useState({
     firstText: false,
@@ -15,7 +17,6 @@ const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
     cursorPointer: true,
   });
 
-  // New state for text opacity
   const [textOpacity, setTextOpacity] = useState(1);
 
   const logoRef = useMouseTilt(showElements.logo);
@@ -30,17 +31,17 @@ const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScrollEvent = () => {
+      handleScroll();
       setShowElements((prev) => ({
         ...prev,
         cursorPointer: window.scrollY <= 0,
       }));
 
-      // Adjust text opacity based on scrollY
       setTextOpacity(window.scrollY > 0 ? 0 : 1);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollEvent);
 
     const timer1 = setTimeout(
       () => setShowElements((prev) => ({ ...prev, firstText: true })),
@@ -59,7 +60,7 @@ const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollEvent);
     };
   }, []);
 
