@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Hero from "../components/hero/Hero";
-import Info from "../components/Info";
-import useScrollEffect from "../hooks/useScrollEffect";
-import useScrollPosition from "../hooks/useScrollPosition";
+
+import Hero from "@/components/hero/Hero";
+import Info from "@/components/Info";
+
+import useScrollEffect from "@/hooks/useScrollEffect";
+import useScrollPosition from "@/hooks/useScrollPosition";
 
 const LandingPage: React.FC = () => {
   const scrollEffect = useScrollEffect();
