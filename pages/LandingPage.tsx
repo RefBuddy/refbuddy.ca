@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Banner from "../components/Banner";
+import Hero from "../components/hero/Hero";
 import Info from "../components/Info";
 import useScrollEffect from "../hooks/useScrollEffect";
 import useScrollPosition from "../hooks/useScrollPosition";
@@ -15,12 +15,12 @@ const LandingPage: React.FC = () => {
     setIsLoaded(true);
   }, []);
 
-  const hideBannerContent = scrollY > 170;
+  const hideHeroContent = scrollY > 170;
 
   return (
     <>
       <div
-        className="banner-bg"
+        className="hero-bg"
         style={{
           opacity: scrollY > 170 ? 0 : 1,
         }}
@@ -34,7 +34,7 @@ const LandingPage: React.FC = () => {
             scrollY <= 170 ? `scale(${scrollEffect.scale})` : "scale(1)",
         }}
       >
-        <Banner hideContent={hideBannerContent} scale={scrollEffect.scale} />
+        <Hero hideContent={hideHeroContent} scale={scrollEffect.scale} />
         {scrollY > 170 && <Info />}
       </div>
     </>

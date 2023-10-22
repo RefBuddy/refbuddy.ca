@@ -1,6 +1,6 @@
-/* banner.css */
-.banner-bg {
-  background-image: url("/banner.png");
+/* hero.css */
+.hero-bg {
+  background-image: url("/hero.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 1160px) {
-  .banner-bg {
+  .hero-bg {
     width: 100%;
   }
 }

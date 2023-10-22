@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import useMouseTilt from "../hooks/useMouseTilt";
-import useScrollEffect from "../hooks/useScrollEffect";
-import useSmoothScrollToTarget from "../hooks/useSmoothScrollToTarget";
+import { FirstText, SecondText } from "./utils/Text";
+import { Logo } from "./utils/Logo";
+import { Blackout } from "./utils/Blackout";
+import { ScrollableContent } from "./utils/ScrollableContent";
+import useMouseTilt from "@/hooks/useMouseTilt";
+import useScrollEffect from "@/hooks/useScrollEffect";
+import useSmoothScrollToTarget from "@/hooks/useSmoothScrollToTarget";
 
-const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
+const Hero: React.FC<{ hideContent: boolean; scale: number }> = ({
   hideContent,
   scale,
 }) => {
@@ -69,52 +73,15 @@ const Banner: React.FC<{ hideContent: boolean; scale: number }> = ({
       className="absolute flex flex-col items-center top-36 w-64"
       style={{ opacity: hideContent ? 0 : 1 }}
     >
-      {showElements.firstText && (
-        <div
-          className="text-white text-3xl font-bold fade-in select-none"
-          style={{ opacity: textOpacity }}
-        >
-          Better Refs.
-        </div>
-      )}
-      {showElements.secondText && (
-        <div
-          className="text-white text-3xl font-bold fade-in pt-1 select-none"
-          style={{ opacity: textOpacity }}
-        >
-          Better Hockey.
-        </div>
-      )}
+      {showElements.firstText && <FirstText opacity={textOpacity} />}
+      {showElements.secondText && <SecondText opacity={textOpacity} />}
       {showElements.logo && (
-        <div
-          className={`mt-8 slide-up logo-container ${
-            showElements.cursorPointer ? "cursor-pointer" : ""
-          }`}
-          onClick={handleLogoClick}
-          ref={logoRef}
-        >
-          <div className="logo-shine"></div>
-          <img
-            src="/logo.png"
-            alt="Logo"
-            style={{ transform: `scale(${scale})` }}
-          />
-        </div>
+        <Logo scale={scale} onClick={handleLogoClick} logoRef={logoRef} />
       )}
-      <div
-        className="pointer-events-none bg-transparent text-transparent"
-        style={{
-          height: "200vh",
-        }}
-      >
-        Scrollable content
-      </div>
-      <div
-        className="blackout"
-        style={{ opacity: hideContent ? 0 : opacity }}
-      ></div>
+      <ScrollableContent />
+      <Blackout opacity={hideContent ? 0 : opacity} />
     </div>
   );
 };
 
-export default Banner;
+export default Hero;
