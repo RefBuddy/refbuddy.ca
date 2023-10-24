@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 import Hero from "@/components/hero/Hero";
-import Info from "@/components/Info";
+import Info from "@/components/info/Info";
 
 import useScrollEffect from "@/hooks/useScrollEffect";
 import useScrollPosition from "@/hooks/useScrollPosition";
