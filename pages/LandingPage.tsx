@@ -12,6 +12,7 @@ const LandingPage: React.FC = () => {
   const scrollEffect = useScrollEffect();
   const [isLoaded, setIsLoaded] = useState(false);
   const [fadeClass, setFadeClass] = useState("fade-in");
+  const [infoFadeClass, setInfoFadeClass] = useState("");
   const scrollY = useScrollPosition();
 
   useEffect(() => {
@@ -21,6 +22,12 @@ const LandingPage: React.FC = () => {
     }, 1000); // Transition duration
     return () => clearTimeout(fadeTimeout);
   }, []);
+
+  useEffect(() => {
+    if (scrollY > 170 && infoFadeClass !== "fade-in") {
+      setInfoFadeClass("fade-in");
+    }
+  }, [scrollY, infoFadeClass]);
 
   const hideHeroContent = scrollY > 170;
 
@@ -42,7 +49,7 @@ const LandingPage: React.FC = () => {
         }}
       >
         <Hero hideContent={hideHeroContent} scale={scrollEffect.scale} />
-        {scrollY > 170 && <Info />}
+        {scrollY > 170 && <Info className={infoFadeClass} />}
       </div>
     </>
   );
