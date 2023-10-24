@@ -29,10 +29,13 @@ export const Logo: React.FC<{
   scale: number;
   onClick: () => void;
   logoRef: any;
-}> = ({ scale, onClick, logoRef }) => {
+  cursorPointer: boolean;
+}> = ({ scale, onClick, logoRef, cursorPointer }) => {
   return (
     <div
-      className="mt-8 slide-up logo-container cursor-pointer"
+      className={`mt-8 slide-up logo-container ${
+        cursorPointer ? "cursor-pointer" : ""
+      }`}
       onClick={onClick}
       ref={logoRef}
     >

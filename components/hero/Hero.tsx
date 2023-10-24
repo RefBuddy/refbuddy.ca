@@ -23,6 +23,7 @@ const Hero: React.FC<{ hideContent: boolean; scale: number }> = ({
   const { showElements, textOpacity } = useHeroEffects(handleScroll);
 
   const logoRef = useMouseTilt(showElements.logo);
+  const cursorPointer = scrollY <= 170;
 
   return (
     <div
@@ -32,7 +33,12 @@ const Hero: React.FC<{ hideContent: boolean; scale: number }> = ({
       {showElements.firstText && <FirstText opacity={textOpacity} />}
       {showElements.secondText && <SecondText opacity={textOpacity} />}
       {showElements.logo && (
-        <Logo scale={scale} onClick={HandleLogoClick} logoRef={logoRef} />
+        <Logo
+          scale={scale}
+          onClick={HandleLogoClick}
+          logoRef={logoRef}
+          cursorPointer={cursorPointer}
+        />
       )}
       <ScrollableContent />
       <Blackout opacity={hideContent ? 0 : opacity} />
