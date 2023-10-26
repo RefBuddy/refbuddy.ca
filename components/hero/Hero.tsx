@@ -23,7 +23,7 @@ const Hero: React.FC<{ hideContent: boolean; scale: number }> = ({
   const { showElements, textOpacity } = useHeroEffects(handleScroll);
 
   const logoRef = useMouseTilt(showElements.logo);
-  const cursorPointer = scrollY <= 170;
+  const cursorPointer = typeof window !== "undefined" && window.scrollY <= 170;
 
   return (
     <div
