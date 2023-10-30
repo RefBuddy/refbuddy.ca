@@ -51,7 +51,12 @@ export const Logo: React.FC<{
 
 // Blackout Component
 export const Blackout: React.FC<{ opacity: number }> = ({ opacity }) => {
-  return <div className="blackout" style={{ opacity: opacity }}></div>;
+  return (
+    <div
+      className={`absolute top-0 left-0 right-0 bottom-0 bg-black pointer-events-none`}
+      style={{ opacity }}
+    ></div>
+  );
 };
 
 // ScrollableContent Component
