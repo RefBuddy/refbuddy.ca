@@ -24,8 +24,8 @@ const LandingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (scrollY > 170 && infoFadeClass !== "fade-in") {
-      setInfoFadeClass("fade-in");
+    if (scrollY > 170 && infoFadeClass !== "fade-in-long") {
+      setInfoFadeClass("fade-in-long");
     }
   }, [scrollY, infoFadeClass]);
 
