@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 import Hero from "@/components/hero/Hero";
-import Info from "@/components/info/Info";
+import ForAssignors from "@/components/forAssignors/ForAssignors";
 
 import useScrollEffect from "@/hooks/useScrollEffect";
 import useScrollPosition from "@/hooks/useScrollPosition";
@@ -49,7 +49,7 @@ const LandingPage: React.FC = () => {
         }}
       >
         <Hero hideContent={hideHeroContent} scale={scrollEffect.scale} />
-        {scrollY > 170 && <Info className={infoFadeClass} />}
+        {scrollY > 170 && <ForAssignors />}
       </div>
     </>
   );

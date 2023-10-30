@@ -21,8 +21,8 @@
 }
 
 .fade-in-long {
-  opacity: 0; /* Start with the element hidden */
-  animation: fadeInLong 1s ease-in-out 0.35s forwards; /* Add a 1s delay before the animation starts and keep the final state */
+  opacity: 0;
+  animation: fadeInLong 1s ease-in-out 0.35s forwards;
 }
 
 @keyframes slideUp {

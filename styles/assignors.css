@@ -1,0 +1,65 @@
+.header {
+  font-size: 2em;
+  margin: 0;
+  padding: 20px;
+  text-align: left;
+  animation: fadeIn 1.5s ease-in-out, slide-in-left-to-right 1s ease-in-out;
+}
+
+.for-assignors-container {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+.content-container {
+  opacity: 0; /* Initially hidden */
+  display: flex;
+  flex-direction: column; /* Stack image and description vertically on mobile */
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out 0.5s forwards; /* 1s delay added here */
+}
+
+.assignors-image {
+  width: 100%; /* Full width on mobile */
+  height: auto;
+}
+
+.description {
+  padding-left: 20px;
+}
+
+/* Use a media query for larger screens */
+@media (min-width: 768px) {
+  .content-container {
+    flex-direction: row; /* Arrange image and description side by side on larger screens */
+  }
+  .assignors-image {
+    max-width: 50%; /* Set a max-width to ensure image and description share the space */
+  }
+  .description {
+    max-width: 50%; /* Set a max-width to ensure image and description share the space */
+  }
+}
+
+@keyframes slide-in-left-to-right {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLong {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
