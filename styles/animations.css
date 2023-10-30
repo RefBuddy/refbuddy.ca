@@ -12,16 +12,17 @@
 }
 
 @keyframes fadeInLong {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  100% {
     opacity: 1;
   }
 }
 
 .fade-in-long {
-  animation: fadeInLong 3s ease-in-out;
+  opacity: 0; /* Start with the element hidden */
+  animation: fadeInLong 1s ease-in-out 0.35s forwards; /* Add a 1s delay before the animation starts and keep the final state */
 }
 
 @keyframes slideUp {
@@ -50,4 +51,14 @@
 
 .instant {
   transition: none;
+}
+
+.blackout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  pointer-events: none;
 }
