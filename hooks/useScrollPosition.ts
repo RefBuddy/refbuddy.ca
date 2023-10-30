@@ -1,25 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-/**
- * Hook to track the current scroll position (vertical).
- * @returns - The current scroll position on the Y-axis.
- */
-const useScrollPosition = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  /**
-   * Handler for scroll events. Updates the state with the current scroll position.
-   */
-  const handleScroll = () => {
-    setScrollY(window.scrollY);
+// Utility function to debounce a function
+const debounce = <T extends any[]>(
+  func: (...args: T) => void,
+  wait: number
+) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: T) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
   };
+};
+
+const useScrollPosition = () => {
+  const [scrollY, setScrollY] = useState<number>(0);
+
+  const handleScroll = debounce(() => {
+    setScrollY(window.scrollY);
+  }, 100);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return scrollY;
 };
